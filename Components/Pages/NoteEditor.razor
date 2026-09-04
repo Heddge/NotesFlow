@@ -1,0 +1,36 @@
+﻿@page "/note/new"
+@code {
+    private string title = "";
+    private string content = "";
+
+    private List<string> titles = new List<string>();
+
+    public void saveNote()
+    {
+        App.notesContainer.AddNote(title, content)
+    }
+
+    public void showNotes()
+    {
+        foreach (Note note in App.notesContainer.notes)
+        {
+            titles.Add(note.Title);
+        }
+    }
+}
+<h1>Новая заметка</h1>
+
+<input @bind="title" placeholder="Название заметки"/>
+
+<textarea @bind="content" placeholder="Текст заметки"></textarea>
+
+<button class="btn btn-primary" @onclick="saveNote">Save</button>
+
+<button class="btn btn-primary" @onclick="showNotes">Show</button>
+
+<ul>
+    @foreach (var t in titles)
+    {
+        <li><b>Элемент:</b> @t</li>
+    }
+</ul>

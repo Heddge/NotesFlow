@@ -1,0 +1,19 @@
+﻿@page "/"
+
+<h1>Мои заметки</h1>
+
+<p>Здесь будут храниться все мои заметки</p>
+
+
+<p>Кол-во заметок: @notesCount</p>
+
+<button class="btn btn-primary" @onclick="increaseNotesCount">Добавить заметку</button>
+
+@code {
+    public int notesCount = 5;
+
+    public void increaseNotesCount()
+    {
+        notesCount++;
+    }
+}
