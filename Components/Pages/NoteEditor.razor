@@ -1,36 +1,31 @@
 ﻿@page "/note/new"
+
+@inject NotesContainer _notesContainer
+
 @code {
     private string title = "";
     private string content = "";
+    private bool showNotes = false;
 
-    private List<string> titles = new List<string>();
-
-    public void saveNote()
-    {
-        App.notesContainer.AddNote(title, content)
-    }
-
-    public void showNotes()
-    {
-        foreach (Note note in App.notesContainer.notes)
-        {
-            titles.Add(note.Title);
-        }
-    }
+    private void SwitchShowing(ref bool show)
+    => show = !show;
 }
+
 <h1>Новая заметка</h1>
 
-<input @bind="title" placeholder="Название заметки"/>
+<input @bind="title" placeholder="Название заметки" />
 
 <textarea @bind="content" placeholder="Текст заметки"></textarea>
 
-<button class="btn btn-primary" @onclick="saveNote">Save</button>
+<button class="btn btn-primary" @onclick="() => _notesContainer.SaveNote(title, content)">Save note</button>
 
-<button class="btn btn-primary" @onclick="showNotes">Show</button>
+<button class="btn btn-primary" @onclick="() => SwitchShowing(ref showNotes)">Show notes</button>
 
-<ul>
-    @foreach (var t in titles)
+@if (showNotes)
+{
+    @foreach (string t in _notesContainer.GetTitles())
     {
-        <li><b>Элемент:</b> @t</li>
+        <p>@t</p>
     }
-</ul>
+}
+

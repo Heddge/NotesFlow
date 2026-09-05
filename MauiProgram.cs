@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using NotesFlow.Objects;
+using NotesFlow.Managers;
 
 namespace NotesFlow
 {
@@ -17,9 +18,11 @@ namespace NotesFlow
 
             builder.Services.AddMauiBlazorWebView();
             builder.Services.AddSingleton<NotesContainer>();
+            builder.Services.AddSingleton<JsonParserManager>();
+            builder.Services.AddSingleton<AppStorageManager>();
 
 #if DEBUG
-    		builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();
 #endif
 
