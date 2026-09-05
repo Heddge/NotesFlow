@@ -6,25 +6,6 @@ using System.Threading.Tasks;
 
 namespace NotesFlow.Objects
 {
-    public class NotesContainer
-    {
-        public List<Note> notes = new List<Note>();
-        private int notesCount = 0;
-        public NotesContainer() { }
-        public NotesContainer(int num)
-        {
-            for (int i = 0; i < num; i++)
-            {
-                notesCount++;
-                notes.Add(new Note($"{i}-ая заметка", $"привет {i} раз", notesCount));
-            }
-        }
-        public void AddNote(string title, string content)
-        {
-            notesCount++;
-            notes.Add(new Note(title, content, notesCount));
-        }
-    }
     public class Note
     {
         public int Id { get; set; }
