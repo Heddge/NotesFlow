@@ -30,12 +30,15 @@ namespace NotesFlow.Managers
                 .ToList();
         }
 
-        public bool UpdateNote(Note note)
-        {
-            if (_appStorageManager.UpdateNote(note.Title, JsonSerializer.Serialize(note)))
-                return true;
-            return false;
-        }
+        public void SaveNote(Note note)
+            => _appStorageManager.SaveNote(note.Id, note.Title, JsonSerializer.Serialize(note));
+
+        //public bool UpdateNote(Note note)
+        //{
+        //    if (_appStorageManager.UpdateNote(note.Title, JsonSerializer.Serialize(note)))
+        //        return true;
+        //    return false;
+        //}
 
     }
 }

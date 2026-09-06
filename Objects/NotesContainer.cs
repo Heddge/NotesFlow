@@ -13,7 +13,7 @@ namespace NotesFlow.Objects
     public class NotesContainer
     {
         private List<Note> notes = new List<Note>();
-        private int _notesCount = 0;
+        public int _nextId;
 
         private JsonParserManager _jsonParserManager;
 
@@ -21,21 +21,29 @@ namespace NotesFlow.Objects
         {
             _jsonParserManager = jpm;
 
-            if (_notesCount == 0)
+            if (_nextId == 0)
             {
                 notes = _jsonParserManager.GetNotes();
-                _notesCount = notes.Count();
+                _nextId = notes.Count() + 1;
             }
         }
 
-        public void UpdateNote(Note n)
+        //public void UpdateNote(Note n)
+        //{
+        //    if (_jsonParserManager.UpdateNote(n))
+        //        return;
+        //    Console.WriteLine($"Error. Note w id:{n.Id} hasn`t updated.");
+        //}
+
+        public void SaveNote(string title, string content)
         {
-            if (_jsonParserManager.UpdateNote(n))
-                return;
-            Console.WriteLine($"Error. Note w id:{n.Id} hasn`t updated.");
+            Note n = new Note(_nextId++, title, content);
+            notes.Add(n);
+            _jsonParserManager.SaveNote(n);
         }
 
         // getters
         public List<Note> GetNotes() => notes;
+        public int GetIdForNew() => _nextId;
     }
 }
