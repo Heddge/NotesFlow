@@ -3,19 +3,21 @@
 @inject NotesContainer _notesContainer
 
 @code {
-    private string title = "";
-    private string content = "";
+    private Note currentNote = new Note();
+
     private bool showNotes = false;
 
     private void SwitchShowing(ref bool show)
     => show = !show;
+
+    private string a = "as";
 }
 
 <h1>Новая заметка</h1>
 
-<input @bind="title" placeholder="Название заметки" />
+<input @bind="currentNote.Title" placeholder="Название заметки" />
 
-<textarea @bind="content" placeholder="Текст заметки"></textarea>
+<textarea @bind="currentNote.Content" placeholder="Текст заметки"></textarea>
 
 @* <button class="btn btn-primary" @onclick="() => _notesContainer.SaveNote(title, content)">Save note</button> *@
 

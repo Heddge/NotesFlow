@@ -16,8 +16,6 @@ namespace NotesFlow.Managers
 
         public JsonParserManager(AppStorageManager asm) 
         {
-            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NotesFlow"))
-                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NotesFlow");
             _appStorageManager = asm;
         }
 

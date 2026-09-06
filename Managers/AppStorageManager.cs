@@ -11,42 +11,33 @@ namespace NotesFlow.Managers
     {
         private List<string> jsonNotes = new List<string>();
 
-        private string _documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        private string _documentsPath = "";
 
         public AppStorageManager()
         {
-            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NotesFlow"))
-                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NotesFlow");
-            CheckStorage();
-        }
+            _documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NotesFlow";
 
-        public bool CheckStorage()
-        {
-            if (Directory.EnumerateFiles(_documentsPath + "\\NotesFlow").Count() == 0)
-                return false;
+            if (!Directory.Exists(_documentsPath))
+                Directory.CreateDirectory(_documentsPath);
 
             ReadDirectory();
-            return true;
         }
 
         private void ReadDirectory()
         {
-            List<string> files = Directory.GetFiles(_documentsPath + "\\NotesFlow").ToList();
-            foreach (var fileName in files)
-                jsonNotes.Add(File.ReadAllText(fileName));
+                List<string> files = Directory.GetFiles(_documentsPath).ToList();
+                foreach (var fileName in files)
+                    jsonNotes.Add(File.ReadAllText(fileName));
         }
-
 
         public bool UpdateNote(string title, string note)
         {
-            File.WriteAllText(_documentsPath + "\\NotesFlow" + "\\" + title, note);
-            if (File.Exists(_documentsPath + "\\NotesFlow" + "\\" + title))
+            File.WriteAllText(_documentsPath + "\\" + title, note);
+            if (File.Exists(_documentsPath + "\\" + title))
                 return true;
 
             return false;
         }
-
-        //public bool DeleteNote()
 
         // getters
         public List<string> GetJsonNotes()

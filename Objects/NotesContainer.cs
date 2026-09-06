@@ -19,9 +19,6 @@ namespace NotesFlow.Objects
 
         public NotesContainer(JsonParserManager jpm)
         {
-            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NotesFlow"))
-                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NotesFlow");
-
             _jsonParserManager = jpm;
 
             if (_notesCount == 0)
@@ -37,17 +34,6 @@ namespace NotesFlow.Objects
                 return;
             Console.WriteLine($"Error. Note w id:{n.Id} hasn`t updated.");
         }
-
-        //public void DeleteNote(int id)
-        //{
-        //    Note current_note = notes.First(x => x.Id == id);
-        //    if (_appStorageManager.DeleteNote(current_note.Title))
-        //    {
-
-        //        return;
-        //    }
-        //    Console.WriteLine($"Error. Note w id:{id} hasn`t updated.");
-        //}
 
         // getters
         public List<Note> GetNotes() => notes;
