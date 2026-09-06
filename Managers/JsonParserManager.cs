@@ -13,12 +13,12 @@ namespace NotesFlow.Managers
     public class JsonParserManager
     {
         private AppStorageManager _appStorageManager;
-        private NotesContainer _notesContainer;
 
-        public JsonParserManager(NotesContainer nc, AppStorageManager asm) 
+        public JsonParserManager(AppStorageManager asm) 
         {
+            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NotesFlow"))
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NotesFlow");
             _appStorageManager = asm;
-            _notesContainer = nc;
         }
 
         public List<Note> GetNotes()
@@ -28,10 +28,16 @@ namespace NotesFlow.Managers
             {
                 Note n = JsonSerializer.Deserialize<Note>(x);
                 return n;
-            }).ToList();
+            })
+                .ToList();
         }
 
-        public List<string> GetJsons() 
-            => _notesContainer.GetNotes().Select(x => JsonSerializer.Serialize(x)).ToList();
+        public bool UpdateNote(Note note)
+        {
+            if (_appStorageManager.UpdateNote(note.Title, JsonSerializer.Serialize(note)))
+                return true;
+            return false;
+        }
+
     }
 }

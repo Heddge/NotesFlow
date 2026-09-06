@@ -17,15 +17,15 @@
 
 <textarea @bind="content" placeholder="Текст заметки"></textarea>
 
-<button class="btn btn-primary" @onclick="() => _notesContainer.SaveNote(title, content)">Save note</button>
+@* <button class="btn btn-primary" @onclick="() => _notesContainer.SaveNote(title, content)">Save note</button> *@
 
 <button class="btn btn-primary" @onclick="() => SwitchShowing(ref showNotes)">Show notes</button>
 
 @if (showNotes)
 {
-    @foreach (string t in _notesContainer.GetTitles())
+    @foreach (Note t in _notesContainer.GetNotes())
     {
-        <p>@t</p>
+        <p>@t.Title</p>
     }
 }
 

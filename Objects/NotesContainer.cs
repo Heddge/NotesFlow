@@ -13,35 +13,43 @@ namespace NotesFlow.Objects
     public class NotesContainer
     {
         private List<Note> notes = new List<Note>();
-        private int notesCount = 0;
+        private int _notesCount = 0;
 
-        private AppStorageManager _appStorageManager;
         private JsonParserManager _jsonParserManager;
 
-        public NotesContainer(AppStorageManager asm, JsonParserManager jpm) 
+        public NotesContainer(JsonParserManager jpm)
         {
-            _appStorageManager = asm;
+            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NotesFlow"))
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NotesFlow");
+
             _jsonParserManager = jpm;
 
-            if (notesCount == 0)
+            if (_notesCount == 0)
             {
-                if (!_appStorageManager.CheckStorage())
-                    return;
-
                 notes = _jsonParserManager.GetNotes();
+                _notesCount = notes.Count();
             }
         }
-        //public EventCallback SaveNote(string title, string content)
-        //{
-        //    notesCount++;
-        //    notes.Add(new Note(title, content, notesCount));
 
-        //    return EventCallback.Empty;
+        public void UpdateNote(Note n)
+        {
+            if (_jsonParserManager.UpdateNote(n))
+                return;
+            Console.WriteLine($"Error. Note w id:{n.Id} hasn`t updated.");
+        }
+
+        //public void DeleteNote(int id)
+        //{
+        //    Note current_note = notes.First(x => x.Id == id);
+        //    if (_appStorageManager.DeleteNote(current_note.Title))
+        //    {
+
+        //        return;
+        //    }
+        //    Console.WriteLine($"Error. Note w id:{id} hasn`t updated.");
         //}
 
-        //public List<string> GetTitles() =>
-        //    notes.Select(x => x.Title).ToList();
-
+        // getters
         public List<Note> GetNotes() => notes;
     }
 }

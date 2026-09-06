@@ -11,18 +11,18 @@ namespace NotesFlow.Managers
     {
         private List<string> jsonNotes = new List<string>();
 
-        private string _documentsPath = Environment.SpecialFolder.MyDocuments.ToString();
+        private string _documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-        private JsonParserManager _jsonParserManager;
-
-        public AppStorageManager(JsonParserManager jsm) 
+        public AppStorageManager()
         {
-            _jsonParserManager = jsm;
+            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NotesFlow"))
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NotesFlow");
+            CheckStorage();
         }
 
         public bool CheckStorage()
         {
-            if (Directory.EnumerateFiles(_documentsPath).Count() == 0)
+            if (Directory.EnumerateFiles(_documentsPath + "\\NotesFlow").Count() == 0)
                 return false;
 
             ReadDirectory();
@@ -31,17 +31,25 @@ namespace NotesFlow.Managers
 
         private void ReadDirectory()
         {
-            List<string> files = Directory.GetFiles(_documentsPath).ToList();
+            List<string> files = Directory.GetFiles(_documentsPath + "\\NotesFlow").ToList();
             foreach (var fileName in files)
                 jsonNotes.Add(File.ReadAllText(fileName));
         }
 
-        public List<string> GetJsonNotes() 
-            => jsonNotes;
 
-        public void SaveToDirectory()
+        public bool UpdateNote(string title, string note)
         {
-            _jsonParserManager.GetJsons();
+            File.WriteAllText(_documentsPath + "\\NotesFlow" + "\\" + title, note);
+            if (File.Exists(_documentsPath + "\\NotesFlow" + "\\" + title))
+                return true;
+
+            return false;
         }
+
+        //public bool DeleteNote()
+
+        // getters
+        public List<string> GetJsonNotes()
+            => jsonNotes;
     }
 }
