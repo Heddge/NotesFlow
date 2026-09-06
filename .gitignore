@@ -168,7 +168,7 @@ BundleArtifacts/
 # Blazor build outputs
 **/wwwroot/_framework/
 **wwwroot/css/app.css
-wwwroot/css/bootstrap/app.css
+**app.css
 **/wwwroot/js/app.js
 **/wwwroot/_content/
 **/wwwroot/*.dll
