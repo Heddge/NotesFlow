@@ -43,6 +43,9 @@ namespace NotesFlow.Managers
             => File.WriteAllText(_documentsPath + "\\" + id + "_" + title + ".json",
                 jsonContent);
 
+        public void DeleteNote(string title)
+            => File.Delete(_documentsPath + "\\" + title);
+
         // getters
         public List<string> GetJsonNotes()
             => jsonNotes;

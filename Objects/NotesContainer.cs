@@ -13,7 +13,7 @@ namespace NotesFlow.Objects
     public class NotesContainer
     {
         private List<Note> notes = new List<Note>();
-        public int _nextId;
+        private int _nextId;
 
         private JsonParserManager _jsonParserManager;
 
@@ -42,8 +42,18 @@ namespace NotesFlow.Objects
             _jsonParserManager.SaveNote(n);
         }
 
+        public void DeleteNote(int id)
+        {
+            string? title = notes.FirstOrDefault(x => x.Id == id).Title;
+            if (title != null)
+            {
+                notes.Remove(notes.FirstOrDefault(x => x.Id == id));
+                _jsonParserManager.DeleteNote(id + "_" + title + ".json");
+            }
+        }
+
         // getters
         public List<Note> GetNotes() => notes;
-        public int GetIdForNew() => _nextId;
+        public int GetIdForNew() => _nextId++;
     }
 }
