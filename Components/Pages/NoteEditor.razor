@@ -1,9 +1,24 @@
 ﻿@page "/note/new"
+@page "/note/{id:int?}"
+@page "/"
 
 @inject NotesContainer _notesContainer
 @inject NavigationManager Navigation
 
 @code {
+    [Parameter]
+    public int? id { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (id != null)
+        {
+            Note n = _notesContainer.GetNotes().First(x => x.Id == id);
+            title = n.Title;
+            content = n.Content;
+        }
+    }
+
     private string title = "";
     private string content = "";
     private bool showNotes = false;
@@ -20,7 +35,7 @@
 
             @foreach (Note note in _notesContainer.GetNotes())
             {
-                <div class="note-list-item">
+                <div class="note-list-item" @onclick="@(() => Navigation.NavigateTo($"/note/{note.Id}"))">
                     <div class="note-list-icon">N</div>
                     <span>@note.Title</span>
                 </div>
@@ -44,7 +59,7 @@
 
         <div class="note-editor-actions">
 
-            <button class="note-editor-button" title="Сохранить" @onclick="()=>_notesContainer.SaveNote(title, content)">
+            <button class="note-editor-button" title="Сохранить" @onclick="() => _notesContainer.SaveNote(title, content)">
                 <svg viewBox="0 0 24 24">
                     <path d="M5 3h11l3 3v15H5V3z" />
                     <path d="M8 3v6h8V3" />
