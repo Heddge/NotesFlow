@@ -25,19 +25,10 @@ namespace NotesFlow.Managers
 
         private void ReadDirectory()
         {
-                List<string> files = Directory.GetFiles(_documentsPath).ToList();
-                foreach (var fileName in files)
-                    jsonNotes.Add(File.ReadAllText(fileName));
+            List<string> files = Directory.GetFiles(_documentsPath).ToList();
+            foreach (var fileName in files)
+                jsonNotes.Add(File.ReadAllText(fileName));
         }
-
-        //public bool UpdateNote(string title, string note)
-        //{
-        //    File.WriteAllText(_documentsPath + "\\" + title, note);
-        //    if (File.Exists(_documentsPath + "\\" + title))
-        //        return true;
-
-        //    return false;
-        //}
 
         public void SaveNote(int id, string title, string jsonContent)
             => File.WriteAllText(_documentsPath + "\\" + id + "_" + title + ".json",
@@ -45,6 +36,12 @@ namespace NotesFlow.Managers
 
         public void DeleteNote(string title)
             => File.Delete(_documentsPath + "\\" + title);
+
+        public void UpdateNote(string oldTitle, int id, string title, string content)
+        {
+            File.WriteAllText(Path.Combine(_documentsPath, id + "_" + oldTitle + ".json"), content);
+            File.Move(Path.Combine(_documentsPath, id + "_" + oldTitle + ".json"), Path.Combine(_documentsPath, id + "_" + title + ".json"));
+        }
 
         // getters
         public List<string> GetJsonNotes()

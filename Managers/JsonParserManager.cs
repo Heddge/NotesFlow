@@ -36,12 +36,7 @@ namespace NotesFlow.Managers
         public void DeleteNote(string title)
             => _appStorageManager.DeleteNote(title);
 
-        //public bool UpdateNote(Note note)
-        //{
-        //    if (_appStorageManager.UpdateNote(note.Title, JsonSerializer.Serialize(note)))
-        //        return true;
-        //    return false;
-        //}
-
+        public void UpdateNote(Note note, string oldTitle)
+            => _appStorageManager.UpdateNote(oldTitle, note.Id, note.Title, JsonSerializer.Serialize(note));
     }
 }
