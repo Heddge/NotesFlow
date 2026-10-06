@@ -11,11 +11,12 @@ namespace NotesFlow.Managers
     {
         private List<string> jsonNotes = new List<string>();
 
-        private string _documentsPath = "";
+        public string _documentsPath = "";
 
         public AppStorageManager()
         {
-            _documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NotesFlow";
+            _documentsPath = Environment.GetFolderPath(
+                Environment.SpecialFolder.MyDocuments) + "\\NotesFlow";
 
             if (!Directory.Exists(_documentsPath))
                 Directory.CreateDirectory(_documentsPath);
@@ -26,21 +27,27 @@ namespace NotesFlow.Managers
         private void ReadDirectory()
         {
             List<string> files = Directory.GetFiles(_documentsPath).ToList();
+            int i = 0;
             foreach (var fileName in files)
+            {
                 jsonNotes.Add(File.ReadAllText(fileName));
+            }
+
         }
 
-        public void SaveNote(int id, string title, string jsonContent)
-            => File.WriteAllText(_documentsPath + "\\" + id + "_" + title + ".json",
+        public void SaveNote(Guid id, string title, string jsonContent)
+            => File.WriteAllText(_documentsPath + "\\" + id + ".json",
                 jsonContent);
 
         public void DeleteNote(string title)
             => File.Delete(_documentsPath + "\\" + title);
 
-        public void UpdateNote(string oldTitle, int id, string title, string content)
+        public void UpdateNote(Guid id, string content)
         {
-            File.WriteAllText(Path.Combine(_documentsPath, id + "_" + oldTitle + ".json"), content);
-            File.Move(Path.Combine(_documentsPath, id + "_" + oldTitle + ".json"), Path.Combine(_documentsPath, id + "_" + title + ".json"));
+            File.WriteAllText(_documentsPath + id + ".json", content);
+
+            //File.WriteAllText(Path.Combine(_documentsPath, id + "_" + id + ".json"), content);
+            //File.Move(Path.Combine(_documentsPath, id + "_" + id + ".json"), Path.Combine(_documentsPath, id + "_" + title + ".json"));
         }
 
         // getters

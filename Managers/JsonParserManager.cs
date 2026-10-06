@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using NotesFlow.Objects;
-using static NotesFlow.Objects.Note;
-using static NotesFlow.Objects.NotesContainer;
 using System.Text.Json;
+using System.Threading.Tasks;
+using Microsoft.Maui.Storage;
+using NotesFlow.Objects;
 
 namespace NotesFlow.Managers
 {
@@ -36,7 +35,8 @@ namespace NotesFlow.Managers
         public void DeleteNote(string title)
             => _appStorageManager.DeleteNote(title);
 
-        public void UpdateNote(Note note, string oldTitle)
-            => _appStorageManager.UpdateNote(oldTitle, note.Id, note.Title, JsonSerializer.Serialize(note));
+        public void UpdateNote(Note note)
+            => _appStorageManager.UpdateNote(
+                note.Id, JsonSerializer.Serialize(note));
     }
 }

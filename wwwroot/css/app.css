@@ -1,9 +1,23 @@
-﻿/*#if (SampleContent)*/
-html, body {
+﻿html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-a, .btn-link {
+
+/* =========================================================
+   Standard Blazor styles
+   ========================================================= */
+
+h1:focus {
+    outline: none;
+}
+
+a,
+.btn-link {
     color: #006bb7;
 }
 
@@ -13,17 +27,12 @@ a, .btn-link {
     border-color: #1861ac;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-.content {
-    padding-top: 1.1rem;
-}
-
-/*#endif*/
-h1:focus {
-    outline: none;
 }
 
 .valid.modified:not([type=checkbox]) {
@@ -37,6 +46,11 @@ h1:focus {
 .validation-message {
     color: #e50000;
 }
+
+
+/* =========================================================
+   Blazor error
+   ========================================================= */
 
 #blazor-error-ui {
     background: lightyellow;
@@ -57,15 +71,10 @@ h1:focus {
         top: 0.5rem;
     }
 
-.blazor-error-boundary {
-    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNDkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIG92ZXJmbG93PSJoaWRkZW4iPjxkZWZzPjxjbGlwUGF0aCBpZD0iY2xpcDAiPjxyZWN0IHg9IjIzNSIgeT0iNTEiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0OSIvPjwvY2xpcFBhdGg+PC9kZWZzPjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMCkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0yMzUgLTUxKSI+PHBhdGggZD0iTTI2My41MDYgNTFDMjY0LjcxNyA1MSAyNjUuODEzIDUxLjQ4MzcgMjY2LjYwNiA1Mi4yNjU4TDI2Ny4wNTIgNTIuNzk4NyAyNjcuNTM5IDUzLjYyODMgMjkwLjE4NSA5Mi4xODMxIDI5MC41NDUgOTIuNzk1IDI5MC42NTYgOTIuOTk2QzI5MC44NzcgOTMuNTEzIDI5MSA5NC4wODE1IDI5MSA5NC42NzgyIDI5MSA5Ny4wNjUxIDI4OS4wMzggOTkgMjg2LjYxNyA5OUwyNDAuMzgzIDk5QzIzNy45NjMgOTkgMjM2IDk3LjA2NTEgMjM2IDk0LjY3ODIgMjM2IDk0LjM3OTkgMjM2LjAzMSA5NC4wODg2IDIzNi4wODkgOTMuODA3MkwyMzYuMzM4IDkzLjAxNjIgMjM2Ljg1OCA5Mi4xMzE0IDI1OS40NzMgNTMuNjI5NCAyNTkuOTYxIDUyLjc5ODUgMjYwLjQwNyA1Mi4yNjU4QzI2MS4yIDUxLjQ4MzcgMjYyLjI5NiA1MSAyNjMuNTA2IDUxWk0yNjMuNTg2IDY2LjAxODNDMjYwLjczNyA2Ni4wMTgzIDI1OS4zMTMgNjcuMTI0NSAyNTkuMzEzIDY5LjMzNyAyNTkuMzEzIDY5LjYxMDIgMjU5LjMzMiA2OS44NjA4IDI1OS4zNzEgNzAuMDg4N0wyNjEuNzk1IDg0LjAxNjEgMjY1LjM4IDg0LjAxNjEgMjY3LjgyMSA2OS43NDc1QzI2Ny44NiA2OS43MzA5IDI2Ny44NzkgNjkuNTg3NyAyNjcuODc5IDY5LjMxNzkgMjY3Ljg3OSA2Ny4xMTgyIDI2Ni40NDggNjYuMDE4MyAyNjMuNTg2IDY2LjAxODNaTTI2My41NzYgODYuMDU0N0MyNjEuMDQ5IDg2LjA1NDcgMjU5Ljc4NiA4Ny4zMDA1IDI1OS43ODYgODkuNzkyMSAyNTkuNzg2IDkyLjI4MzcgMjYxLjA0OSA5My41Mjk1IDI2My41NzYgOTMuNTI5NSAyNjYuMTE2IDkzLjUyOTUgMjY3LjM4NyA5Mi4yODM3IDI2Ny4zODcgODkuNzkyMSAyNjcuMzg3IDg3LjMwMDUgMjY2LjExNiA4Ni4wNTQ3IDI2My41NzYgODYuMDU0N1oiIGZpbGw9IiNGRkU1MDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvZz48L3N2Zz4=) no-repeat 1rem/1.8rem, #b32121;
-    padding: 1rem 1rem 1rem 3.7rem;
-    color: white;
-}
 
-    .blazor-error-boundary::after {
-        content: "An error has occurred."
-    }
+/* =========================================================
+   iOS safe area
+   ========================================================= */
 
 .status-bar-safe-area {
     display: none;
@@ -77,146 +86,63 @@ h1:focus {
         position: sticky;
         top: 0;
         height: env(safe-area-inset-top);
-        background-color: #f7f7f7;
+        background-color: #171717;
         width: 100%;
         z-index: 1;
     }
 
-    .flex-column, .navbar-brand {
+    .flex-column,
+    .navbar-brand {
         padding-left: env(safe-area-inset-left);
     }
 }
 
-/* =========================
-   Note Editor
-   ========================= */
 
-.page:has(.note-editor) .sidebar {
+/* =========================================================
+   NotesFlow — Full Screen
+   ========================================================= */
+
+/* Скрываем стандартный MAUI sidebar */
+.page:has(.notes-layout) .sidebar {
     display: none;
 }
 
-.page:has(.note-editor) main {
+/* Скрываем стандартную верхнюю панель */
+.page:has(.notes-layout) .top-row {
+    display: none;
+}
+
+/* Убираем стандартные отступы layout */
+.page:has(.notes-layout) main {
     margin-left: 0;
-    width: 100%;
-}
-
-.page:has(.note-editor) .top-row {
-    display: none;
-}
-
-.note-editor {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    box-sizing: border-box;
-    padding: 55px 90px;
-    background: #171717;
-    color: #d6d6d6;
-}
-
-.note-editor-title {
-    display: block;
-    width: calc(100% - 100px);
     padding: 0;
-    margin: 0 0 30px 0;
-    border: none;
-    outline: none;
-    background: transparent;
-    color: #e5e5e5;
-    font-family: inherit;
-    font-size: 42px;
-    font-weight: 700;
-    line-height: 1.2;
-}
-
-    .note-editor-title::placeholder {
-        color: #777;
-    }
-
-.note-editor-content {
-    display: block;
-    width: calc(100% - 100px);
-    height: calc(100vh - 180px);
-    padding: 0;
-    margin: 0;
-    border: none;
-    outline: none;
-    resize: none;
-    background: transparent;
-    color: #cfcfcf;
-    font-family: inherit;
-    font-size: 17px;
-    line-height: 1.7;
-}
-
-    .note-editor-content::placeholder {
-        color: #777;
-        font-style: italic;
-    }
-
-.note-editor-actions {
-    position: fixed;
-    right: 28px;
-    bottom: 28px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.note-editor-button {
-    width: 56px;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    border: 1px solid #68469b;
-    border-radius: 50%;
-    background: #181818;
-    color: #d0d0d0;
-    cursor: pointer;
-    transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
-}
-
-    .note-editor-button:hover {
-        background: #242424;
-        border-color: #9064c8;
-        transform: scale(1.05);
-    }
-
-    .note-editor-button:active {
-        transform: scale(0.96);
-    }
-
-    .note-editor-button svg {
-        width: 23px;
-        height: 23px;
-        fill: none;
-        stroke: currentColor;
-        stroke-width: 1.7;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-    }
-
-/* =========================
-   Notes layout
-   ========================= */
-
-.notes-layout {
-    display: flex;
     width: 100%;
     height: 100vh;
+}
+
+
+/* =========================================================
+   Main Notes Layout
+   ========================================================= */
+
+.notes-layout {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
     background: #171717;
 }
 
 
-/* =========================
+/* =========================================================
    Sidebar
-   ========================= */
+   ========================================================= */
 
 .notes-sidebar {
-    width: 300px;
-    min-width: 300px;
+    width: 320px;
+    min-width: 320px;
     height: 100vh;
     box-sizing: border-box;
     padding: 28px 14px;
@@ -224,12 +150,67 @@ h1:focus {
     overflow-y: auto;
 }
 
-.notes-sidebar-title {
-    margin: 0 0 20px 14px;
-    color: #aaaaaa;
-    font-size: 25px;
-    font-weight: 700;
+
+/* =========================================================
+   Sidebar Header
+   ========================================================= */
+
+.notes-sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 14px 20px 14px;
+    gap: 10px;
+    white-space: nowrap;
 }
+
+.notes-sidebar-title {
+    margin: 0;
+    color: #aaaaaa;
+    font-size: 23px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   Add Note Button
+   ========================================================= */
+
+.notes-add-button {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: #aaaaaa;
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+    .notes-add-button:hover {
+        background: #303030;
+        color: #dddddd;
+    }
+
+    .notes-add-button:active {
+        transform: scale(0.92);
+    }
+
+
+/* =========================================================
+   Notes List
+   ========================================================= */
 
 .notes-list {
     display: flex;
@@ -237,12 +218,19 @@ h1:focus {
     gap: 12px;
 }
 
+
+/* =========================================================
+   Note Item
+   ========================================================= */
+
 .note-list-item {
+    position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
     height: 72px;
-    padding: 0 16px;
     box-sizing: border-box;
+    padding: 0 12px 0 16px;
     border-radius: 14px;
     background: #292929;
     color: #aaaaaa;
@@ -256,9 +244,15 @@ h1:focus {
         transform: translateX(2px);
     }
 
+
+/* =========================================================
+   Note Icon
+   ========================================================= */
+
 .note-list-icon {
     width: 44px;
     height: 44px;
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -271,9 +265,68 @@ h1:focus {
 }
 
 
-/* =========================
-   Editor
-   ========================= */
+/* =========================================================
+   Note Title in Sidebar
+   ========================================================= */
+
+.note-list-title {
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   Delete Note Button
+   ========================================================= */
+
+.note-delete-button {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: #888888;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+/* Показываем корзину только при наведении */
+.note-list-item:hover .note-delete-button {
+    opacity: 1;
+}
+
+.note-delete-button:hover {
+    background: #3a3a3a;
+    color: #dddddd;
+}
+
+.note-delete-button:active {
+    transform: scale(0.92);
+}
+
+.note-delete-button svg {
+    width: 19px;
+    height: 19px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+/* =========================================================
+   Note Editor
+   ========================================================= */
 
 .note-editor {
     position: relative;
@@ -281,14 +334,25 @@ h1:focus {
     min-width: 0;
     min-height: 100vh;
     box-sizing: border-box;
-    padding: 55px 70px;
+    /*
+       Верхний отступ: 45px
+       Левый отступ: 60px
+       Справа — практически до самого края
+    */
+    padding: 45px 0 45px 60px;
     background: #171717;
     color: #d6d6d6;
 }
 
+
+/* =========================================================
+   Note Title
+   ========================================================= */
+
 .note-editor-title {
     display: block;
-    width: calc(100% - 100px);
+    width: 100%;
+    box-sizing: border-box;
     padding: 0;
     margin: 0 0 30px 0;
     border: none;
@@ -302,13 +366,19 @@ h1:focus {
 }
 
     .note-editor-title::placeholder {
-        color: #777;
+        color: #777777;
     }
+
+
+/* =========================================================
+   Note Content
+   ========================================================= */
 
 .note-editor-content {
     display: block;
-    width: calc(100% - 100px);
+    width: 100%;
     height: calc(100vh - 180px);
+    box-sizing: border-box;
     padding: 0;
     margin: 0;
     border: none;
@@ -322,14 +392,14 @@ h1:focus {
 }
 
     .note-editor-content::placeholder {
-        color: #777;
+        color: #777777;
         font-style: italic;
     }
 
 
-/* =========================
-   Editor buttons
-   ========================= */
+/* =========================================================
+   Editor Action Buttons
+   ========================================================= */
 
 .note-editor-actions {
     position: fixed;
@@ -339,6 +409,11 @@ h1:focus {
     flex-direction: column;
     gap: 12px;
 }
+
+
+/* =========================================================
+   Editor Button
+   ========================================================= */
 
 .note-editor-button {
     width: 56px;
@@ -374,3 +449,60 @@ h1:focus {
         stroke-linecap: round;
         stroke-linejoin: round;
     }
+
+
+/* =========================================================
+   Scrollbar
+   ========================================================= */
+
+.notes-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.notes-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.notes-sidebar::-webkit-scrollbar-thumb {
+    background: #3a3a3a;
+    border-radius: 10px;
+}
+
+    .notes-sidebar::-webkit-scrollbar-thumb:hover {
+        background: #4a4a4a;
+    }
+
+/* =========================================================
+   Final position of editor fields
+   ========================================================= */
+
+.note-editor {
+    padding-top: 45px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+
+/* Название */
+.note-editor-title {
+    width: calc(100% - 120px) !important;
+    margin-top: 0 !important;
+    margin-left: 60px !important;
+    margin-right: 60px !important;
+    margin-bottom: 30px !important;
+}
+
+
+/* Контент */
+.note-editor-content {
+    width: calc(100% - 120px) !important;
+    margin-left: 60px !important;
+    margin-right: 60px !important;
+}
+
+
+/* Чтобы кнопки не зависели от положения полей */
+.note-editor-actions {
+    right: 28px !important;
+    bottom: 28px !important;
+}
