@@ -78,7 +78,7 @@
 
         <div class="notes-list">
 
-            @foreach (Note note in _notesContainer.GetNotes())
+            @foreach (Note note in _notesContainer.GetNotes().OrderByDescending(x => x.UpdatedAt))
             {
                 if (note == null) continue;
 

@@ -44,10 +44,7 @@ namespace NotesFlow.Managers
 
         public void UpdateNote(Guid id, string content)
         {
-            File.WriteAllText(_documentsPath + id + ".json", content);
-
-            //File.WriteAllText(Path.Combine(_documentsPath, id + "_" + id + ".json"), content);
-            //File.Move(Path.Combine(_documentsPath, id + "_" + id + ".json"), Path.Combine(_documentsPath, id + "_" + title + ".json"));
+            File.WriteAllText(_documentsPath + "//" + id + ".json", content);
         }
 
         // getters
