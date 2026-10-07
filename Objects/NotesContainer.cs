@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using NotesFlow.Managers;
+using Windows.System;
 
 namespace NotesFlow.Objects
 {
@@ -48,6 +49,7 @@ namespace NotesFlow.Objects
             Note? n = notes.FirstOrDefault(x => x.Id == id);
             if (n != null)
             {
+                File.WriteAllText("C://Users//Mi//Desktop//hi.txt", "norm");
                 notes.Remove(n);
                 _jsonParserManager.DeleteNote(id + ".json");
             }

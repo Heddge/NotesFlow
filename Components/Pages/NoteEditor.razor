@@ -53,11 +53,10 @@
     public void Delete(Guid noteid)
     {
         if (noteid == Guid.Empty) return;
-        _notesContainer.DeleteNote((Guid)id);
+        _notesContainer.DeleteNote((Guid)noteid);
         id = null;
         isEditing = false;
         Navigation.NavigateTo($"/");
-
     }
 }
 
