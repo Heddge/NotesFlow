@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using NotesFlow.Managers;
-using Windows.System;
 
 namespace NotesFlow.Objects
 {
@@ -13,10 +12,12 @@ namespace NotesFlow.Objects
     {
         private List<Note> notes = new List<Note>();
         private JsonParserManager _jsonParserManager;
+        private NoteDbManager _noteDbManager;
 
-        public NotesContainer(JsonParserManager jpm)
+        public NotesContainer(JsonParserManager jpm, NoteDbManager ndm)
         {
             _jsonParserManager = jpm;
+            _noteDbManager = ndm;
 
             if (notes.Count() == 0)
             {
