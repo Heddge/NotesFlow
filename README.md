@@ -124,7 +124,7 @@ NotesFlow/
 ### Run
 
 ```bash
-git clone https://github.com/<your-username>/NotesFlow.git
+git clone https://github.com/Heddge/NotesFlow.git
 cd NotesFlow
 ```
 
