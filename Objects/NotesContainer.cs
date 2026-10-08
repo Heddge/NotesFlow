@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,37 +12,31 @@ namespace NotesFlow.Objects
     public class NotesContainer
     {
         private List<Note> notes = new List<Note>();
-        private JsonParserManager _jsonParserManager;
         private NoteDbManager _noteDbManager;
 
-        public NotesContainer(JsonParserManager jpm, NoteDbManager ndm)
+        public NotesContainer(NoteDbManager ndm)
         {
-            _jsonParserManager = jpm;
             _noteDbManager = ndm;
-
-            if (notes.Count() == 0)
-            {
-                notes = _jsonParserManager.GetNotes();
-            }
+            notes = _noteDbManager.GetNotes();
         }
 
         public void SaveNote(Guid id, string title, string content)
         {
             Note n = new Note(id, title, content);
-            notes.Add(n);
-            _jsonParserManager.SaveNote(n);
+            if (_noteDbManager.AddNote(n))
+                notes.Add(n);
         }
 
         public void UpdateNote(Guid id, Note n)
         {
-            int idx = notes.IndexOf(n);
-            if (idx != -1)
+            int idx = notes.FindIndex(x => x.Id == id);
+            if (idx == -1)
+                return;
+            n.UpdatedAt = DateTime.Now;
+            if (_noteDbManager.UpdateNote(n))
             {
                 notes[idx].Title = n.Title;
                 notes[idx].Content = n.Content;
-                notes[idx].UpdatedAt = DateTime.Now;
-
-                _jsonParserManager.UpdateNote(notes[idx]);
             }
         }
 
@@ -50,9 +45,8 @@ namespace NotesFlow.Objects
             Note? n = notes.FirstOrDefault(x => x.Id == id);
             if (n != null)
             {
-                File.WriteAllText("C://Users//Mi//Desktop//hi.txt", "norm");
-                notes.Remove(n);
-                _jsonParserManager.DeleteNote(id + ".json");
+                if (_noteDbManager.DeleteNote(n))
+                    notes.Remove(n);
             }
         }
 
