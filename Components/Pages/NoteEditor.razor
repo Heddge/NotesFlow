@@ -10,7 +10,7 @@
     public Guid? id { get; set; }
 
     private bool isEditing = false;
-    private Note n { get; set; }
+    private Note n = new Note(Guid.Empty, "", "");
 
 
     protected override void OnParametersSet()
@@ -30,6 +30,9 @@
         n = new Note(_notesContainer.GetId(), "", "");
         id = n.Id;
     }
+
+    protected override async Task OnInitializedAsync()
+        => await _notesContainer.GetNotesAsync();
 
     private void HandleSave()
     {
@@ -76,13 +79,14 @@
         </div>
 
         <div class="notes-list">
-
-            @foreach (Note note in _notesContainer.GetNotes().OrderByDescending(x => x.UpdatedAt))
+            @if (_notesContainer.GetNotes() != null)
             {
-                if (note == null) continue;
+                foreach (Note note in _notesContainer.GetNotes().OrderByDescending(x => x.UpdatedAt))
+                {
+                    if (note == null) continue;
 
-                <div class="note-list-item @(n?.Id == note.Id ? "active" : "")"
-                     @onclick="@(() => Navigation.NavigateTo($"/note-editor/{(Guid)note.Id}"))">
+                    <div class="note-list-item @(n?.Id == note.Id ? "active" : "")"
+                    @onclick="@(() => Navigation.NavigateTo($"/note-editor/{(Guid)note.Id}"))">
 
                     <div class="note-list-icon">N</div>
 
@@ -102,6 +106,7 @@
                     </button>
 
                 </div>
+            }
             }
 
         </div>

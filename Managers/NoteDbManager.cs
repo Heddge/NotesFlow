@@ -9,6 +9,9 @@ using NotesFlow.Objects;
 
 namespace NotesFlow.Managers
 {
+    /// <summary>
+    /// Менеджер общения NoteContainer (UI) и SQLite.
+    /// </summary>
     public class NoteDbManager
     {
         IDbContextFactory<NoteDbContext> _contextFactory;

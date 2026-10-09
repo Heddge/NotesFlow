@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -11,19 +12,35 @@ namespace NotesFlow.Objects
 {
     public class NotesContainer
     {
-        private List<Note> notes = new List<Note>();
-        private NoteDbManager _noteDbManager;
+        private List<Note> notes;
+        //private NoteDbManager _noteDbManager;
+        //private NotesApiManager _notesApiManager;
+        private SynchronizeManager _synchronizeManager;
 
-        public NotesContainer(NoteDbManager ndm)
+        public NotesContainer(SynchronizeManager sm)
         {
-            _noteDbManager = ndm;
-            notes = _noteDbManager.GetNotes();
+            //_noteDbManager = ndm;
+            //_notesApiManager = nam;
+            _synchronizeManager = sm;
+            notes = new List<Note>();
+            //notes = _noteDbManager.GetNotes();
+            //GetNotesAsync();
         }
 
-        public void SaveNote(Guid id, string title, string content)
+        public async Task GetNotesAsync()
+        {
+            List<Note>? ns = await _notesApiManager.GetNotes();
+            if (ns != null)
+                foreach (var note in ns)
+                    this.notes.Add(note);
+        }
+
+        public async Task SaveNote(Guid id, string title, string content)
         {
             Note n = new Note(id, title, content);
-            if (_noteDbManager.AddNote(n))
+            //if (_noteDbManager.AddNote(n))
+            //notes.Add(n);
+            if (_notesApiManager.SaveNote(n) != null)
                 notes.Add(n);
         }
 
@@ -32,8 +49,8 @@ namespace NotesFlow.Objects
             int idx = notes.FindIndex(x => x.Id == id);
             if (idx == -1)
                 return;
-            n.UpdatedAt = DateTime.Now;
-            if (_noteDbManager.UpdateNote(n))
+            n.UpdatedAt = DateTime.UtcNow;
+            if (_notesApiManager.UpdateNote(n) != null)
             {
                 notes[idx].Title = n.Title;
                 notes[idx].Content = n.Content;
@@ -45,8 +62,10 @@ namespace NotesFlow.Objects
             Note? n = notes.FirstOrDefault(x => x.Id == id);
             if (n != null)
             {
-                if (_noteDbManager.DeleteNote(n))
+                if (_notesApiManager.DeleteNote(id) != null)
                     notes.Remove(n);
+                //if (_noteDbManager.DeleteNote(n))
+                    //notes.Remove(n);
             }
         }
 

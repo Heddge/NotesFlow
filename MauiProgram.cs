@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.Sqlite;
 using JetBrains.Annotations;
 using System.Diagnostics;
+using Microsoft.Extensions.Http;
 
 namespace NotesFlow
 {
@@ -29,6 +30,7 @@ namespace NotesFlow
             builder.Services.AddSingleton<NoteDbManager>();
             //builder.Services.AddDbContext<NoteDbContext>(options => options.UseSqlite("Data Source="+_dbpath));
             builder.Services.AddPooledDbContextFactory<NoteDbContext>(options => options.UseSqlite("Data Source="+_dbpath));
+            builder.Services.AddHttpClient<NotesApiManager>();
 
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();
